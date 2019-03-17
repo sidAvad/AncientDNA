@@ -1,5 +1,6 @@
 #$ -S /bin/bash      # Use bash
-#$ -N ped-sim_TSI # name for job in qstat/output filename prefix
+#$ -N extract-pairs_run-phibd  # name for job in qstat/output filename prefix
+#$ -o /fs/cbsubscb09/storage/siddharth/AncientDNA/extract-pairs_run-phibd.$JOB_ID #Send output to working directory
 #$ -j y              # output from stdout/err in one file
 #$ -m ae             # send email on abort or exit of job
 #$ -l h_vmem=256G     # use 256G of memory instead of the default (4G)
@@ -17,8 +18,10 @@
 /programs/bin/labutils/mount_server cbsubscb09 /storage
 cd siddharth/AncientDNA
 
-sh ped-sim.sh
+source activate py27
+#sh extract-pairs_run-phibd.sh
 #plink --vcf Data/founders_1000genomes/allchrom --make-bed --out allchrom --noweb
 #vcf2bed --keep-header < Data/founders_1000genomes/allchrom.vcf > Data/founders_1000genomes/allchrom.bed
-
 #plink2 --vcf Data/founders_1000genomes/allchrom.vcf --indep-pairwise 1000 25 0.25 
+sh extract-pairs_run-phibd.sh 
+#sh ped-sim.sh
